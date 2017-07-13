@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "node"
+  - "6"
+before_install:
+  - "npm -g typescript tslint jest-cli"
+  - "npm --version"
+  - "tsc --version"
+  - "tslint --version"
+  - "jest --version"
+script:
+  - "npm run lint"
+  - "npm run compile"
+  - "npm run test"
+os:
+  - "linux"
+  - "osx"

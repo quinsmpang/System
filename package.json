@@ -1,0 +1,50 @@
+{
+  "name": "@typescript-standard-library/system",
+  "version": "0.0.1",
+  "description": "TypeScript Standard Library",
+  "keywords": [
+    "typescript",
+    "standard",
+    "library"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "lint": "tslint --format stylish --project .",
+    "compile": "tsc",
+    "test": "jest -i --verbose",
+    "test:watch": "jest -i -b --watch"
+  },
+  "author": "Alex Chugaev <achugaev93@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@typescript-standard-library/core": "file:../Core",
+    "@typescript-standard-library/testing": "file:../Testing"
+  },
+  "devDependencies": {
+    "@types/jest": "^20.0.0",
+    "@types/node": "^8.0.12",
+    "jest": "^20.0.4",
+    "ts-jest": "^20.0.6",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "repository": "https://github.com/typescript-standard-library/System.git",
+  "jest": {
+    "automock": false,
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": ".*\\.spec\\.(ts|tsx)$",
+    "transformIgnorePatterns": [],
+    "coveragePathIgnorePatterns": [],
+    "testPathIgnorePatterns": []
+  }
+}

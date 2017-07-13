@@ -1,0 +1,7 @@
+.git
+.idea
+.gitignore
+*.js
+*.js.map
+node_modules
+Tests

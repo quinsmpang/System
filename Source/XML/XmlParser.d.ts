@@ -1,0 +1,33 @@
+import { XmlDocument } from './DOM/XmlDocument';
+import { XmlParserState } from './Parser/XmlParserState';
+import { TextParser } from '@typescript-standard-library/core/Source/Text/Parsing/TextParser';
+export declare class XmlParser extends TextParser<XmlParserState, XmlDocument> {
+    private _document;
+    readonly value: XmlDocument;
+    protected getInitialState(): XmlParserState;
+    protected reduce(currentChar: string, index: number): void;
+    private updateState(currentChar);
+    private onOpenTag(currentChar);
+    private onOpenTagStart(currentChar);
+    private onOpenTagName(currentChar);
+    private onOpenTagBody(currentChar);
+    private onOpenTagEnd(currentChar);
+    private onAttribute(currentChar);
+    private onAttributeNameStart(currentChar);
+    private onAttributeNameEnd(currentChar);
+    private onAttributeValueStart(currentChar);
+    private onCloseTagName(currentChar);
+    private onCloseTag(currentChar);
+    private onComment(currentChar);
+    private onCommentStart(currentChar);
+    private onCommentText(currentChar);
+    private onCommentEnd(currentChar);
+    private onCData(currentChar);
+    private onCDataStart(currentChar);
+    private onCDataText(currentChar);
+    private onCDataEnd(currentChar);
+    private onTextContent(currentChar);
+    private isSpaceChar(currentChar);
+    private isAcceptableAttributeNameChar(currentChar);
+    private isAttributeValueEndChar(currentChar);
+}
