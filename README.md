@@ -1,6 +1,6 @@
 # TypeScript Standard Library
 
-![Travis CI Status](https://travis-ci.org/typescript-standard-library/Core.svg?branch=master)
+![Travis CI Status](https://travis-ci.org/typescript-standard-library/System.svg?branch=master)
 
 **Standard library** provides **high quality** and **reusable** codebase written in TypeScript. 
 It designed for development of **large applications** when **scalability** and **consistency** 
