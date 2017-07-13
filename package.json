@@ -20,8 +20,8 @@
   "author": "Alex Chugaev <achugaev93@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@typescript-standard-library/core": "file:../Core",
-    "@typescript-standard-library/testing": "file:../Testing"
+    "@typescript-standard-library/core": "^0.0.1",
+    "@typescript-standard-library/testing": "^0.0.1"
   },
   "devDependencies": {
     "@types/jest": "^20.0.0",
