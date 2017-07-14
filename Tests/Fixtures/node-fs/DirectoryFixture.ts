@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import {AccessPermissions} from '../../../Source/IO/AccessPermissions';
-import {callAsyncMethod} from '@typescript-standard-library/core/Source/Async/Utils';
 import {Fixture} from '@typescript-standard-library/testing/Source/Fixture';
+import {DeferredObject} from '@typescript-standard-library/core/Source/Async/DeferredObject';
 
 
 export class DirectoryFixture extends Fixture {
@@ -26,11 +26,31 @@ export class DirectoryFixture extends Fixture {
 
 
     protected doCreate(): Promise<void> {
-        return callAsyncMethod<void>(fs, 'mkdir', this._path, this._accessPermissions);
+        let deferred: DeferredObject = new DeferredObject();
+
+        fs.mkdir(this._path, this._accessPermissions, (error: NodeJS.ErrnoException) => {
+            if (error) {
+                deferred.reject(error);
+            } else {
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
     }
 
 
     protected doDestroy(): Promise<void> {
-        return callAsyncMethod<void>(fs, 'rmdir', this._path);
+        let deferred: DeferredObject = new DeferredObject();
+
+        fs.rmdir(this._path, (error: NodeJS.ErrnoException) => {
+            if (error) {
+                deferred.reject(error);
+            } else {
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
     }
 }

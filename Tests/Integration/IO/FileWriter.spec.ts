@@ -1,5 +1,5 @@
-import {FileWriter} from '../../../../Source/IO/FileWriter';
-import {FileSystem} from '../../../../Source/IO/FileSystem';
+import {FileWriter} from '../../../Source/IO/FileWriter';
+import {FileSystem} from '../../../Source/IO/FileSystem';
 
 
 describe(`FileWriter`, () => {

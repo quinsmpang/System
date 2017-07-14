@@ -1,10 +1,10 @@
-import {FileSystem} from '../../../../Source/IO/FileSystem';
-import {Utf8Encoding} from '../../../../Source/Text/Utf8Encoding';
-import {FileMode} from '../../../../Source/IO/FileMode';
-import {AccessPermissions} from '../../../../Source/IO/AccessPermissions';
-import {FileDescriptor} from '../../../../Source/IO/types';
-import {FileSystemEntry} from '../../../../Source/IO/FileSystemEntry';
-import {FileSystemFixtureCollection} from '../../../Fixtures/node-fs/FileSystemFixtureCollection';
+import {FileSystem} from '../../../Source/IO/FileSystem';
+import {Utf8Encoding} from '../../../Source/Text/Utf8Encoding';
+import {FileMode} from '../../../Source/IO/FileMode';
+import {AccessPermissions} from '../../../Source/IO/AccessPermissions';
+import {FileDescriptor} from '../../../Source/IO/types';
+import {FileSystemEntry} from '../../../Source/IO/FileSystemEntry';
+import {FileSystemFixtureCollection} from '../../Fixtures/node-fs/FileSystemFixtureCollection';
 import {ArgumentNullException} from '@typescript-standard-library/core/Source/Exceptions/ArgumentNullException';
 import {DateTime} from '@typescript-standard-library/core/Source/Time/DateTime';
 

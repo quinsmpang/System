@@ -1,8 +1,8 @@
 import * as fs from 'fs';
-import {FileReader} from '../../../../Source/IO/FileReader';
-import {FileWriter} from '../../../../Source/IO/FileWriter';
-import {FileSystem} from '../../../../Source/IO/FileSystem';
-import {Process} from '../../../../Source/Process/Process';
+import {FileReader} from '../../../Source/IO/FileReader';
+import {FileWriter} from '../../../Source/IO/FileWriter';
+import {FileSystem} from '../../../Source/IO/FileSystem';
+import {Process} from '../../../Source/Process/Process';
 
 
 describe(`FileReader`, () => {

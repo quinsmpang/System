@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import {AccessPermissions} from '../../../Source/IO/AccessPermissions';
-import {callAsyncMethod} from '@typescript-standard-library/core/Source/Async/Utils';
 import {Fixture} from '@typescript-standard-library/testing/Source/Fixture';
+import {DeferredObject} from '@typescript-standard-library/core/Source/Async/DeferredObject';
 
 
 export class FileFixture extends Fixture {
@@ -28,16 +28,32 @@ export class FileFixture extends Fixture {
     }
 
 
-    protected async doCreate(): Promise<void> {
-        await callAsyncMethod(fs, 'writeFile', this._fileName, this._content/*, {
-            mode: this._accessPermissions
-        }*/);
+    protected doCreate(): Promise<void> {
+        let deferred: DeferredObject = new DeferredObject();
+
+        fs.writeFile(this._fileName, this._content, (error: NodeJS.ErrnoException) => {
+            if (error) {
+                deferred.reject(error);
+            } else {
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
     }
 
 
-    protected async doDestroy(): Promise<void> {
-        try {
-            await callAsyncMethod(fs, 'unlink', this._fileName);
-        } catch (ex) {/* */}
+    protected doDestroy(): Promise<void> {
+        let deferred: DeferredObject = new DeferredObject();
+
+        fs.unlink(this._fileName, (error: NodeJS.ErrnoException) => {
+            if (error) {
+                deferred.reject(error);
+            } else {
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
     }
 }
