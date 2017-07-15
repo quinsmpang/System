@@ -21,6 +21,7 @@ export class FileSystem {
             fs.lstat(fullName, (error: Error, stats: fs.Stats): void => {
                 if (error) {
                     reject(error);
+
                     return;
                 }
 
@@ -430,6 +431,7 @@ export class FileSystem {
             (error: NodeJS.ErrnoException, bytesRead: number): void => {
                 if (error) {
                     deferred.reject(error);
+
                     return;
                 }
 

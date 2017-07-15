@@ -2,5 +2,5 @@ import {Dictionary} from '@typescript-standard-library/core/Source/Collections/D
 
 
 export class HttpRouteValueDictionary extends Dictionary<string, any> {
-    
+
 }

@@ -7,4 +7,3 @@ export enum AccessMode {
     Execute         = 1 << 2
 }
 
-

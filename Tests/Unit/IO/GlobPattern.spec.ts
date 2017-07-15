@@ -81,7 +81,7 @@ describe(`GlobPattern`, () => {
                     expect(pattern.test('/a/b/c/package.json')).toBe(false);
                 });
             });
-        
+
             describe(`win32 paths`, () => {
                 it(`at begin of file name`, () => {
                     let pattern: GlobPattern = new GlobPattern(`D:\\a\\*.exe`);
@@ -179,7 +179,7 @@ describe(`GlobPattern`, () => {
                     expect(pattern.test('/a/b/c/p/node_modules/m/package.json')).toBe(false);
                 });
             });
-        
+
             describe(`win32 paths`, () => {
                 it(`matches any number of any characters`, () => {
                     let pattern: GlobPattern = new GlobPattern(`D:\\projects\\**\\package.json`);
@@ -233,7 +233,7 @@ describe(`GlobPattern`, () => {
                     expect(pattern.test('/a/b/downloads/.zip')).toBe(false);
                 });
             });
-        
+
             describe(`win32 paths`, () => {
                 it(`supports character ranges`, () => {
                     let pattern: GlobPattern = new GlobPattern(`D:\\downloads\\photos[0-9][0-9][0-9][0-9].zip`);

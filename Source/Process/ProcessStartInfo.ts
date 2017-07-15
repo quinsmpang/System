@@ -20,7 +20,7 @@ export class ProcessStartInfo {
     public standardOutput: StandardOutputStream | ProcessIOMode = ProcessIOMode.Inherit;
     public standardError: StandardErrorStream | ProcessIOMode = ProcessIOMode.Inherit;
 
-    
+
     public constructor(fileName: string, ...commandLineArguments: string[]) {
         Assert.argument('fileName', fileName).notNull();
 

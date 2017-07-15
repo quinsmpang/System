@@ -12,7 +12,7 @@ import {ReadOnlyCollection} from '@typescript-standard-library/core/Source/Colle
 
 
 export class FileSystemWalker {
-    private _depth: number = 1;
+    private _depth: number = Infinity;
     private _pathPatterns: List<PathPattern> = new List<PathPattern>();
     private _entrySelectors: List<FileSystemEntrySelector> = new List<FileSystemEntrySelector>();
 
@@ -23,7 +23,7 @@ export class FileSystemWalker {
 
 
     public set depth(value: number) {
-        Assert.argument('value', value).notNull();
+        Assert.argument('value', value).notNull().bounds(1, Infinity);
 
         if (value < 1) {
             throw new InvalidArgumentException(`Search depth cannot be less than 1.`);
@@ -85,7 +85,7 @@ export class FileSystemWalker {
 
 
     private async processEntry(entry: FileSystemEntry, context: FileSystemWalkerContext): Promise<void> {
-        if (!this.entryPathMatchesPatterns(entry)) {
+        if (!this.entryMatchesPathPatterns(entry)) {
             return;
         }
 
@@ -97,7 +97,7 @@ export class FileSystemWalker {
     }
 
 
-    private entryPathMatchesPatterns(entry: FileSystemEntry): boolean {
+    private entryMatchesPathPatterns(entry: FileSystemEntry): boolean {
         if (this._pathPatterns.length === 0) {
             return true;
         }

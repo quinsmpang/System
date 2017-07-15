@@ -14,7 +14,7 @@ export class OptionsCollection extends Enumerable<Option> {
         return false;
     }
 
-    
+
     public find(key: string): Option {
         for (let option of this) {
             if (option.key === key) {
@@ -25,7 +25,7 @@ export class OptionsCollection extends Enumerable<Option> {
         return null;
     }
 
-    
+
     public findAll(key: string): OptionsCollection {
         let options: Option[] = [];
 
@@ -34,7 +34,7 @@ export class OptionsCollection extends Enumerable<Option> {
                 options.push(option);
             }
         }
-        
+
         return new OptionsCollection(options);
     }
 

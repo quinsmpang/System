@@ -18,6 +18,7 @@ export class NumberFormatInfo implements ICloneable<NumberFormatInfo> {
         let clone: NumberFormatInfo = formatInfo.clone();
 
         clone._isReadOnly = true;
+
         return clone;
     }
 

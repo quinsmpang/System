@@ -10,6 +10,6 @@ export declare class FileSystemWalker {
     walk(startDirectory: string, entryProcessor: FileSystemEntryProcessor): Promise<void>;
     private processDirectory(context);
     private processEntry(entry, context);
-    private entryPathMatchesPatterns(entry);
+    private entryMatchesPathPatterns(entry);
     private entryMatchesSelectors(entry);
 }

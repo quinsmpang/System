@@ -5,8 +5,8 @@ import {IDisposable} from '@typescript-standard-library/core/Source/types';
 
 export class Component extends EventEmitter implements IDisposable {
     private _isDisposed: boolean = false;
-    
-    
+
+
     public get isDisposed(): boolean {
         return this._isDisposed;
     }

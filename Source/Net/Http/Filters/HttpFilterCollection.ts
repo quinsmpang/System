@@ -3,7 +3,6 @@ import {Collection} from '@typescript-standard-library/core/Source/Collections/C
 
 
 export class HttpFilterCollection extends Collection<IFilter> {
-    
-    
+
 
 }

@@ -6,7 +6,7 @@ export class Option extends KeyValuePair<string, string|boolean> {
         return typeof this.value === 'boolean';
     }
 
-    
+
     public toString(): string {
         if (this.isLogical) {
             return this.key;

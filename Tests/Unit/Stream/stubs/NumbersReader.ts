@@ -19,5 +19,5 @@ export class NumbersReader extends Readable<number, number> {
     protected async transform(chunk: number): Promise<number> {
         return chunk;
     }
-    
+
 }

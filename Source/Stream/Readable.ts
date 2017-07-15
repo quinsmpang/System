@@ -23,6 +23,7 @@ export abstract class Readable<TIn, TOut = TIn> extends Chainable<TIn, TOut> {
 
         if (input == null) {
             this.setEnded(true);
+
             return null;
         }
 
@@ -37,6 +38,7 @@ export abstract class Readable<TIn, TOut = TIn> extends Chainable<TIn, TOut> {
     public async resume(): Promise<void> {
         if (this.isEnded) {
             this.setPaused(true);
+
             return;
         }
 

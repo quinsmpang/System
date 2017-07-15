@@ -30,13 +30,13 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
 
     private _args: Arguments;
     private _segments: Collection<string>;
-    
-    
+
+
     public get value(): Arguments {
         if (this._args == null) {
             throw new InvalidOperationException(`Arguments parser haven't been initialized.`);
         }
-        
+
         return this._args;
     }
 
@@ -59,8 +59,8 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
     protected getInitialState(): ArgumentsParserState {
         return new ArgumentsParserState();
     }
-    
-    
+
+
     protected reduce(currentChar: string): void {
         this.updateState(currentChar);
         this.state.previousChar = currentChar;
@@ -71,11 +71,11 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
         this._segments = new Collection<string>();
     }
 
-    
+
     private updateState(currentChar: string): void {
         let state: ArgumentsParserState = this.state;
         let {inQuotedSegment} = state;
-    
+
         if (inQuotedSegment) {
             if (this.isTrailingQuot(currentChar)) {
                 this.endQuotedSegment();
@@ -92,21 +92,21 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
             }
         }
     }
-    
+
 
     private beginQuotedSegment(quotSign: string): void {
         let state: ArgumentsParserState = this.state;
-        
+
         state.inQuotedSegment = true;
         state.quotSign = quotSign;
     }
-    
-    
+
+
     private endQuotedSegment(): void {
         let state: ArgumentsParserState = this.state;
-        
+
         this.flushSegment();
-        
+
         state.inQuotedSegment = false;
         state.quotSign = EMPTY_STRING;
     }
@@ -121,8 +121,8 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
 
         state.text = EMPTY_STRING;
     }
-    
-    
+
+
     private createArguments(): void {
         let [executablePath, mainModulePath, ...segments] = this._segments.toArray();
         let commands: string[] = [];
@@ -180,8 +180,8 @@ export class ArgumentsParser extends TextParser<ArgumentsParserState, Arguments>
     private isSegmentDelimiter(currentChar: string): boolean {
         return currentChar === SEGMENTS_DELIMITER_SIGN;
     }
-    
-    
+
+
     private isOptionName(segment: string): boolean {
         return segment[0] === '-';
     }

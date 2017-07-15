@@ -21,13 +21,13 @@ export class ProcessEvent extends Event {
     public get process(): Process {
         return this._process;
     }
-    
-    
+
+
     public constructor(eventType: ProcessEventType, process: Process) {
         super(eventType);
 
         Assert.argument('process', process).notNull();
-        
+
         this._process = process;
     }
 }

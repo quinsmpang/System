@@ -11,4 +11,3 @@ export type FileSystemEntryProcessor = (
     context: FileSystemWalkerContext
 ) => Promise<void>;
 
-

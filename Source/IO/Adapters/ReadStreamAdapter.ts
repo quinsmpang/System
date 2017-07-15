@@ -69,6 +69,7 @@ export abstract class ReadStreamAdapter<TStream extends ReadableStream, TIn, TOu
 
         if (this.isClosed) {
             deferred.resolve();
+
             return deferred.promise;
         }
 

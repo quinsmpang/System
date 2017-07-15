@@ -55,8 +55,8 @@ export class Process extends EventEmitter implements IDisposable {
 
         return deferred.promise;
     }
-    
-    
+
+
     private _startInfo: ProcessStartInfo;
     private _nativeProcess: NodeChildProcess;
     private _terminationSignal: string = undefined;
@@ -72,23 +72,23 @@ export class Process extends EventEmitter implements IDisposable {
 
     public get id(): number {
         this.throwIfNoAssociatedProcess();
-        
+
         return this._nativeProcess.pid;
     }
-    
+
 
     public get startInfo(): ProcessStartInfo {
         return this._startInfo;
     }
-    
-    
+
+
     public set startInfo(value: ProcessStartInfo) {
         Assert.argument('value', value).notNull();
 
         this._startInfo = value;
     }
-    
-    
+
+
     public get isConnected(): boolean {
         return this._nativeProcess && this._nativeProcess.connected;
     }
@@ -106,11 +106,11 @@ export class Process extends EventEmitter implements IDisposable {
 
         return this._exitCode;
     }
-    
-    
+
+
     public get terminationSignal(): string {
         this.throwIfNoAssociatedProcess();
-    
+
         return this._terminationSignal;
     }
 
@@ -120,8 +120,8 @@ export class Process extends EventEmitter implements IDisposable {
 
         return new StandardInputStream(this._nativeProcess.stdin);
     }
-    
-    
+
+
     public constructor(startInfo: ProcessStartInfo) {
         super();
 
@@ -229,7 +229,7 @@ export class Process extends EventEmitter implements IDisposable {
 
     private spawnProcess(): void {
         let startInfo: ProcessStartInfo = this.startInfo;
-        
+
         this._nativeProcess = spawn(
             startInfo.fileName,
             startInfo.commandLineArguments,
@@ -333,7 +333,7 @@ export class Process extends EventEmitter implements IDisposable {
         this.dispatchEvent(new ProcessMessageEvent(this, message));
     }
 
-    
+
     private onNativeProcessExit(exitCode: number): void {
         if (this._exitCode == null) {
             this._exitCode = exitCode;
@@ -341,8 +341,8 @@ export class Process extends EventEmitter implements IDisposable {
             this.notify(ProcessEvent.EXIT);
         }
     }
-    
-    
+
+
     private onNativeProcessTerminate(terminationSignal: string): void {
         if (this._terminationSignal == null) {
             this._terminationSignal = terminationSignal;
@@ -350,8 +350,8 @@ export class Process extends EventEmitter implements IDisposable {
             this.notify(ProcessEvent.TERMINATE);
         }
     }
-    
-    
+
+
     private onNativeProcessClose(exitCode: number): void {
         if (this._exitCode == null) {
             this._exitCode = exitCode;
@@ -359,8 +359,8 @@ export class Process extends EventEmitter implements IDisposable {
             this.notify(ProcessEvent.CLOSE);
         }
     }
-    
-    
+
+
     private throwIfNoAssociatedProcess(): void {
         if (!this._nativeProcess) {
             throw new NoAssociatedProcessException(this);

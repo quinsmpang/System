@@ -24,6 +24,41 @@ export class FileSystemEntry implements IFileSystemEntry {
     }
 
 
+    public get isFile(): boolean {
+        return this._stats.isFile();
+    }
+
+
+    public get isDirectory(): boolean {
+        return this._stats.isDirectory();
+    }
+
+
+    public get isCharacterDevice(): boolean {
+        return this._stats.isCharacterDevice();
+    }
+
+
+    public get isBlockDevice(): boolean {
+        return this._stats.isBlockDevice();
+    }
+
+
+    public get isSymbolicLink(): boolean {
+        return this._stats.isSymbolicLink();
+    }
+
+
+    public get isFIFO(): boolean {
+        return this._stats.isFIFO();
+    }
+
+
+    public get isSocket(): boolean {
+        return this._stats.isSocket();
+    }
+
+
     public get path(): string {
         return this._path.originalPath;
     }

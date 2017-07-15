@@ -10,9 +10,8 @@ export class TestStateContainer extends StateContainer<TestState, TestAction> {
 
 
     protected processAction(action: TestAction): void {
-        switch (action.constructor) {
-            case TestAction:
-                this.onNextReport(action);
+        if (action.constructor === TestAction) {
+            this.onNextReport(action);
         }
     }
 

@@ -14,12 +14,12 @@ export class TextWrapper extends Writable<string, string> {
 
 
     public async close(): Promise<void> {
-
+        // Stub
     }
 
 
     protected async _write(output: string): Promise<void> {
-
+        // Stub
     }
 
 

@@ -2,5 +2,5 @@ import {Exception} from '@typescript-standard-library/core/Source/Exceptions/Exc
 
 
 export class StreamException extends Exception {
-    
+
 }

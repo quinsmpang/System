@@ -12,7 +12,7 @@ export class TextStorage extends Writable<string, string> {
 
 
     public async close(): Promise<void> {
-
+        // Stub
     }
 
 

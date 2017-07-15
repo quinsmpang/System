@@ -19,12 +19,12 @@ export class XmlNode extends Node implements ICloneable<XmlNode> {
         this._parentNode = value;
     }
 
-    
+
     public get attributes(): XmlNodeAttributes {
         return this._attributes;
     }
-    
-    
+
+
     public get childNodes(): XmlNodeList {
         return this._childNodes;
     }
@@ -32,11 +32,11 @@ export class XmlNode extends Node implements ICloneable<XmlNode> {
 
     public clone(): XmlNode {
         let clonedNode: XmlNode = new XmlNode(this.nodeName);
-        
+
         clonedNode._parentNode = this.parentNode;
         clonedNode._childNodes = this.childNodes.clone();
         clonedNode._attributes = this.attributes.clone();
-        
+
         return clonedNode;
     }
 }

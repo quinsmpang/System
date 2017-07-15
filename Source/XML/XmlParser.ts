@@ -5,13 +5,13 @@ import {TextParser} from '@typescript-standard-library/core/Source/Text/Parsing/
 
 export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
     private _document: XmlDocument = new XmlDocument();
-    
-    
+
+
     public get value(): XmlDocument {
         return this._document;
     }
 
-    
+
     protected getInitialState(): XmlParserState {
         let state: XmlParserState = new XmlParserState();
 
@@ -19,19 +19,19 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
 
         return state;
     }
-    
-    
+
+
     protected reduce(currentChar: string, index: number): void {
         this.updateState(currentChar);
-    
+
         this.state.previousText.append(currentChar);
     }
-    
-    
+
+
     private updateState(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {isOpenTag, isCloseTag, isComment, isCData} = state;
-        
+
         if (isOpenTag) {
             this.onOpenTag(currentChar);
         } else if (isCloseTag) {
@@ -44,11 +44,11 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             this.onTextContent(currentChar);
         }
     }
-    
-    
+
+
     // Open tag context
-    
-    
+
+
     private onOpenTag(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {
@@ -56,7 +56,7 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             isAttribute
         } = state;
         let isOpenTagBody: boolean = !isOpenTagStart && !isOpenTagName && !isOpenTagEnd && !isAttribute;
-        
+
         if (isOpenTagStart) {                                       // <
             this.onOpenTagStart(currentChar);
         } else if (isOpenTagName) {                                 // <{element_name}
@@ -69,11 +69,11 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             this.onAttribute(currentChar);
         }
     }
-    
-    
+
+
     private onOpenTagStart(currentChar: string): void {
         let state: XmlParserState = this.state;
-        
+
         if (currentChar === '!') {                              // <!
             state.setOpenTagGroup(false, false, false, false);
             state.setCommentGroup(true, true, false, false);
@@ -85,12 +85,12 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.nodeName += currentChar;
         }
     }
-    
-    
+
+
     private onOpenTagName(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (this.isSpaceChar(currentChar)) {                    // <{element_name}{space}
             state.createNewNode();
             state.setOpenTagGroup(true, false, false, false);
@@ -106,12 +106,12 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.nodeName += currentChar;
         }
     }
-    
-    
+
+
     private onOpenTagBody(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (!this.isSpaceChar(currentChar)) {
             if (currentChar === '>') {
                 state.createNewNode();
@@ -134,28 +134,28 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             }
         }
     }
-    
-    
+
+
     private onOpenTagEnd(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (currentChar === '>' && previousText.lastChar === '?') {
             state.setOpenTagGroup(false, false, false, false);
         }
     }
-    
-    
+
+
     // Attribute context
-    
-    
+
+
     private onAttribute(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {
             isAttributeName, isAttributeNameStart, isAttributeNameEnd,
             isAttributeValue, isAttributeValueStart
         } = state;
-        
+
         if (isAttributeName) {
             if (isAttributeNameStart) {
                 this.onAttributeNameStart(currentChar);
@@ -168,33 +168,33 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             }
         }
     }
-    
-    
+
+
     private onAttributeNameStart(currentChar: string): void {
         let state: XmlParserState = this.state;
-        
+
         if (!this.isAcceptableAttributeNameChar(currentChar)) { // ... {attribute_name}=
             state.setAttributeNameGroup(true, false, true);
         } else {
             state.nodeAttributeName += currentChar;
         }
     }
-    
-    
+
+
     private onAttributeNameEnd(currentChar: string): void {
         let state: XmlParserState = this.state;
-        
+
         if (currentChar === `"`) {                          // ... {attribute_name}="
             state.nodeAttributeQuot = currentChar;
             state.setAttributeNameGroup(false, false, false);
             state.setAttributeValueGroup(true, true, false);
         }
     }
-    
-    
+
+
     private onAttributeValueStart(currentChar: string): void {
         let state: XmlParserState = this.state;
-        
+
         if (this.isAttributeValueEndChar(currentChar)) {    // ... {attribute_name}="{attribute_value}"
             state.createNodeAttribute();
             state.setAttributeValueGroup(false, false, false);
@@ -203,11 +203,11 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.nodeAttributeValue += currentChar;
         }
     }
-    
-    
+
+
     // Close tag context
-    
-    
+
+
     private onCloseTagName(currentChar: string): void {
         let state: XmlParserState = this.state;
 
@@ -227,17 +227,17 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             this.onCloseTagName(currentChar);
         }
     }
-    
-    
+
+
     // Comment context
-    
-    
+
+
     private onComment(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {
             isCommentStart, isCommentText, isCommentEnd
         } = state;
-        
+
         if (isCommentStart) {                                       // <!
             this.onCommentStart(currentChar);
         } else if (isCommentText) {
@@ -246,12 +246,12 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             this.onCommentEnd(currentChar);
         }
     }
-    
-    
+
+
     private onCommentStart(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (currentChar === '-') {
             if (previousText.lastChar === '-') {                // <!--
                 state.setCommentGroup(true, false, true, false);
@@ -261,12 +261,12 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.setCDataGroup(true, true, false, false);
         }
     }
-    
-    
+
+
     private onCommentText(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (currentChar === '-') {
             if (previousText.lastChar === '-') {                // --
                 state.setCommentGroup(true, false, false, true);
@@ -277,8 +277,8 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.commentTextContent += currentChar;
         }
     }
-    
-    
+
+
     private onCommentEnd(currentChar: string): void {
         let state: XmlParserState = this.state;
 
@@ -287,17 +287,17 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.setCommentGroup(false, false, false, false);
         }
     }
-    
-    
+
+
     // CData context
-    
-    
+
+
     private onCData(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {
             isCDataStart, isCDataText, isCDataEnd
         } = state;
-        
+
         if (isCDataStart) {                                         // <![
             this.onCDataStart(currentChar);
         } else if (isCDataText) {
@@ -306,8 +306,8 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             this.onCDataEnd(currentChar);
         }
     }
-    
-    
+
+
     private onCDataStart(currentChar: string): void {
         let state: XmlParserState = this.state;
 
@@ -317,12 +317,12 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             }
         }
     }
-    
-    
+
+
     private onCDataText(currentChar: string): void {
         let state: XmlParserState = this.state;
         let {previousText} = state;
-        
+
         if (currentChar === ']') {
             if (previousText.lastChar === ']') {                // ]]
                 state.setCDataGroup(true, false, false, true);
@@ -333,8 +333,8 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.charDataContent += currentChar;
         }
     }
-    
-    
+
+
     private onCDataEnd(currentChar: string): void {
         let state: XmlParserState = this.state;
 
@@ -343,14 +343,14 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
             state.setCDataGroup(false, false, false, false);
         }
     }
-    
-    
+
+
     // Text content context
-    
-    
+
+
     private onTextContent(currentChar: string): void {
         let state: XmlParserState = this.state;
-    
+
         if (currentChar === '<') {
             state.createTextNode();
             state.setOpenTagGroup(true, true, false, false);
@@ -359,23 +359,23 @@ export class XmlParser extends TextParser<XmlParserState, XmlDocument> {
         }
     }
 
-    
+
     // Tokens detectors
-    
-    
+
+
     private isSpaceChar(currentChar: string): boolean {
         return /^\s+$/i.test(currentChar);
     }
-    
-    
+
+
     private isAcceptableAttributeNameChar(currentChar: string): boolean {
         return !(this.isSpaceChar(currentChar) || currentChar === '=' || currentChar === '>');
     }
-    
-    
+
+
     private isAttributeValueEndChar(currentChar: string): boolean {
         let {nodeAttributeQuot, previousText} = this.state;
-        
+
         return currentChar === nodeAttributeQuot && previousText.lastChar !== '\\';
     }
 }

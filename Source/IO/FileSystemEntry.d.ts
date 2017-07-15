@@ -14,6 +14,13 @@ export declare class FileSystemEntry implements IFileSystemEntry {
     private _entryType;
     private _path;
     readonly entryType: FileSystemEntryType;
+    readonly isFile: boolean;
+    readonly isDirectory: boolean;
+    readonly isCharacterDevice: boolean;
+    readonly isBlockDevice: boolean;
+    readonly isSymbolicLink: boolean;
+    readonly isFIFO: boolean;
+    readonly isSocket: boolean;
     readonly path: string;
     readonly directoryName: string;
     readonly baseName: string;

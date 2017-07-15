@@ -7,7 +7,7 @@ export class FileSystemWalkerContext {
     private _startDirectory: string;
     private _entryProcessor: FileSystemEntryProcessor;
     private _currentDirectory: string;
-    private _currentLevel: number = 0;
+    private _currentLevel: number = 1;
 
 
     public get startDirectory(): string {

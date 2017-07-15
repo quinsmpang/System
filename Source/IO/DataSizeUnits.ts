@@ -12,4 +12,3 @@ export enum DataSizeUnits {
     Yottabytes  = 1024 ** 8
 }
 
-

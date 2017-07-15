@@ -45,23 +45,23 @@ export class Arguments {
     private _mainModulePath: string;
     private _commands: ReadOnlyCollection<string>;
     private _options: OptionsCollection;
-    
-    
+
+
     public get executablePath(): string {
         return this._executablePath;
     }
-    
+
 
     public get mainModulePath(): string {
         return this._mainModulePath;
     }
 
-    
+
     public get commands(): ReadOnlyCollection<string> {
         return this._commands;
     }
-    
-    
+
+
     public get options(): OptionsCollection {
         return this._options;
     }
@@ -83,8 +83,8 @@ export class Arguments {
         this._executablePath = executablePath;
         this._mainModulePath = mainModulePath;
     }
-    
-    
+
+
     public toString(): string {
         let segments: string[] = [];
 
@@ -99,11 +99,11 @@ export class Arguments {
         for (let command of this._commands) {
             segments.push(`${command}`);
         }
-        
+
         for (let option of this._options) {
             segments.push(`${option.toString()}`);
         }
-        
+
         return segments.join(' ');
     }
 }
