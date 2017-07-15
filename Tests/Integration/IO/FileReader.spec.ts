@@ -1,22 +1,10 @@
 import * as fs from 'fs';
 import {FileReader} from '../../../Source/IO/FileReader';
 import {FileWriter} from '../../../Source/IO/FileWriter';
-import {FileSystem} from '../../../Source/IO/FileSystem';
+import {Process} from '../../../Source/Process/Process';
 
 
 describe(`FileReader`, () => {
-    // const DEFAULT_TIMEOUT_INTERVAL = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    //
-    //
-    // beforeAll(() => {
-    //     jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000000;
-    // });
-    //
-    //
-    // afterAll(() => {
-    //     jasmine.DEFAULT_TIMEOUT_INTERVAL = DEFAULT_TIMEOUT_INTERVAL;
-    // });
-
 
     test(`creating of new file reader`, async () => {
         let reader: FileReader = new FileReader(__dirname + '/_Samples/TextFile.txt');
@@ -88,8 +76,8 @@ describe(`FileReader`, () => {
         let originalImageName: string = __dirname + '/_Samples/Image.jpg';
         let copiedImageName: string = __dirname + '/_Samples/ImageCopy.jpg';
 
-        if (await FileSystem.fileExists(copiedImageName)) {
-            await FileSystem.removeFile(copiedImageName);
+        if (fs.existsSync(copiedImageName)) {
+            fs.unlinkSync(copiedImageName);
         }
 
         let reader: FileReader = new FileReader(originalImageName);
@@ -103,12 +91,12 @@ describe(`FileReader`, () => {
 
         expect(fs.existsSync(copiedImageName)).toBe(true);
 
-        // let process: Process = await Process.run('cmp', originalImageName, copiedImageName);
-        //
-        // expect(process.exitCode).toBe(0);
+        let process: Process = await Process.run('cmp', originalImageName, copiedImageName);
 
-        if (await FileSystem.fileExists(copiedImageName)) {
-            await FileSystem.removeFile(copiedImageName);
+        expect(process.exitCode).toBe(0);
+
+        if (fs.existsSync(copiedImageName)) {
+            fs.unlinkSync(copiedImageName);
         }
     });
 });
