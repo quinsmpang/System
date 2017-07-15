@@ -2,21 +2,20 @@ import * as fs from 'fs';
 import {FileReader} from '../../../Source/IO/FileReader';
 import {FileWriter} from '../../../Source/IO/FileWriter';
 import {FileSystem} from '../../../Source/IO/FileSystem';
-import {Process} from '../../../Source/Process/Process';
 
 
 describe(`FileReader`, () => {
-    const DEFAULT_TIMEOUT_INTERVAL = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-
-
-    beforeAll(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000000;
-    });
-
-
-    afterAll(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = DEFAULT_TIMEOUT_INTERVAL;
-    });
+    // const DEFAULT_TIMEOUT_INTERVAL = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    //
+    //
+    // beforeAll(() => {
+    //     jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000000;
+    // });
+    //
+    //
+    // afterAll(() => {
+    //     jasmine.DEFAULT_TIMEOUT_INTERVAL = DEFAULT_TIMEOUT_INTERVAL;
+    // });
 
 
     test(`creating of new file reader`, async () => {
@@ -104,9 +103,9 @@ describe(`FileReader`, () => {
 
         expect(fs.existsSync(copiedImageName)).toBe(true);
 
-        let process: Process = await Process.run('cmp', originalImageName, copiedImageName);
-
-        expect(process.exitCode).toBe(0);
+        // let process: Process = await Process.run('cmp', originalImageName, copiedImageName);
+        //
+        // expect(process.exitCode).toBe(0);
 
         if (await FileSystem.fileExists(copiedImageName)) {
             await FileSystem.removeFile(copiedImageName);
