@@ -6,18 +6,6 @@ import {Process} from '../../../Source/Process/Process';
 
 
 describe(`FileReader`, () => {
-    const DEFAULT_TIMEOUT_INTERVAL = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-
-
-    beforeAll(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    });
-
-
-    afterAll(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = DEFAULT_TIMEOUT_INTERVAL;
-    });
-
 
     test(`creating of new file reader`, async () => {
         let reader: FileReader = new FileReader(__dirname + '/_Samples/TextFile.txt');

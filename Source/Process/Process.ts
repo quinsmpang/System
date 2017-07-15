@@ -228,16 +228,15 @@ export class Process extends EventEmitter implements IDisposable {
 
 
     private spawnProcess(): void {
-        let startInfo: ProcessStartInfo = this.startInfo;
-
         this._nativeProcess = spawn(
-            startInfo.fileName,
-            startInfo.commandLineArguments,
+            this.startInfo.fileName,
+            this.startInfo.commandLineArguments,
             this.getSpawnCommandOptions()
         );
     }
 
 
+    @Method.profile()
     private getSpawnCommandOptions(): SpawnOptions {
         let startInfo: ProcessStartInfo = this.startInfo;
 
