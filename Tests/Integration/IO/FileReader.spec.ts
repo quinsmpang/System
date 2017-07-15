@@ -80,14 +80,16 @@ describe(`FileReader`, () => {
             fs.unlinkSync(copiedImageName);
         }
 
+        expect(fs.existsSync(copiedImageName)).toBe(false);
+
         let reader: FileReader = new FileReader(originalImageName);
         let writer: FileWriter = new FileWriter(copiedImageName);
 
         reader.addReceiver(writer);
 
         await reader.resume();
-        await reader.close();
-        await writer.close();
+        // await reader.close();
+        // await writer.close();
 
         expect(fs.existsSync(copiedImageName)).toBe(true);
 
