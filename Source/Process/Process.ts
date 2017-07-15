@@ -17,7 +17,6 @@ import {Assert} from '@typescript-standard-library/core/Source/Assertion/Assert'
 import {DeferredObject} from '@typescript-standard-library/core/Source/Async/DeferredObject';
 import {InvalidOperationException} from '@typescript-standard-library/core/Source/Exceptions/InvalidOperationException';
 import {Method} from '@typescript-standard-library/core/Source/Language/Decorators/Method';
-import * as util from 'util';
 
 
 export class Process extends EventEmitter implements IDisposable {
@@ -240,7 +239,7 @@ export class Process extends EventEmitter implements IDisposable {
     private getSpawnCommandOptions(): SpawnOptions {
         let startInfo: ProcessStartInfo = this.startInfo;
 
-        let options = {
+        return {
             cwd: startInfo.workingDirectory,
             detached: startInfo.isDetached,
             env: startInfo.environment,
@@ -253,10 +252,6 @@ export class Process extends EventEmitter implements IDisposable {
                 this.getStandardError()
             ]
         };
-
-        process.stdout.write(util.inspect(options, false, 10, true));
-
-        return options;
     }
 
 

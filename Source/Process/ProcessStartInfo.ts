@@ -2,14 +2,14 @@ import {ProcessIOMode} from './types';
 import {StandardInputStream} from './StandardInputStream';
 import {StandardOutputStream} from './StandardOutputStream';
 import {StandardErrorStream} from './StandardErrorStream';
-import {Dictionary} from '@typescript-standard-library/core/Source/Collections/Dictionary';
 import {Assert} from '@typescript-standard-library/core/Source/Assertion/Assert';
+import {Pool} from '@typescript-standard-library/core/Source/types';
 
 
 export class ProcessStartInfo {
     public fileName: string;
     public commandLineArguments: string[];
-    public environment: Dictionary<string, string> = new Dictionary();
+    public environment: Pool<string> = process.env;
     public isDetached: boolean = false;
     public shellName: string = '';
     public useShellExecute: boolean = false;

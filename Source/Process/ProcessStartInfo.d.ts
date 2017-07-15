@@ -2,11 +2,11 @@ import { ProcessIOMode } from './types';
 import { StandardInputStream } from './StandardInputStream';
 import { StandardOutputStream } from './StandardOutputStream';
 import { StandardErrorStream } from './StandardErrorStream';
-import { Dictionary } from '@typescript-standard-library/core/Source/Collections/Dictionary';
+import { Pool } from '@typescript-standard-library/core/Source/types';
 export declare class ProcessStartInfo {
     fileName: string;
     commandLineArguments: string[];
-    environment: Dictionary<string, string>;
+    environment: Pool<string>;
     isDetached: boolean;
     shellName: string;
     useShellExecute: boolean;
