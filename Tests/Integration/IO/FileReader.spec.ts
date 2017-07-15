@@ -1,7 +1,7 @@
-import * as fs from 'fs';
 import {FileReader} from '../../../Source/IO/FileReader';
 import {FileWriter} from '../../../Source/IO/FileWriter';
 import {Process} from '../../../Source/Process/Process';
+import {FileSystem} from '../../../Source/IO/FileSystem';
 
 
 describe(`FileReader`, () => {
@@ -76,11 +76,11 @@ describe(`FileReader`, () => {
         let originalImageName: string = __dirname + '/_Samples/Image.jpg';
         let copiedImageName: string = __dirname + '/_Samples/ImageCopy.jpg';
 
-        if (fs.existsSync(copiedImageName)) {
-            fs.unlinkSync(copiedImageName);
+        if (await FileSystem.fileExists(copiedImageName)) {
+            await FileSystem.removeFile(copiedImageName);
         }
 
-        expect(fs.existsSync(copiedImageName)).toBe(false);
+        expect(await FileSystem.fileExists(copiedImageName)).toBe(false);
 
         let reader: FileReader = new FileReader(originalImageName);
         let writer: FileWriter = new FileWriter(copiedImageName);
@@ -88,17 +88,17 @@ describe(`FileReader`, () => {
         reader.addReceiver(writer);
 
         await reader.resume();
-        // await reader.close();
-        // await writer.close();
+        await reader.close();
+        await writer.close();
 
-        expect(fs.existsSync(copiedImageName)).toBe(true);
+        expect(await FileSystem.fileExists(copiedImageName)).toBe(true);
 
         let process: Process = await Process.run('cmp', originalImageName, copiedImageName);
 
         expect(process.exitCode).toBe(0);
 
-        if (fs.existsSync(copiedImageName)) {
-            fs.unlinkSync(copiedImageName);
+        if (await FileSystem.fileExists(copiedImageName)) {
+            await FileSystem.removeFile(copiedImageName);
         }
     });
 });

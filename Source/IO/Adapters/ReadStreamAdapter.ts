@@ -155,12 +155,12 @@ export abstract class ReadStreamAdapter<TStream extends ReadableStream, TIn, TOu
         };
 
         let removeListeners = () => {
-            this.baseStream.removeListener('close', onEnd);
+            this.baseStream.removeListener('end', onEnd);
             this.baseStream.removeListener('readable', onReadable);
             this.baseStream.removeListener('error', onError);
         };
 
-        this.baseStream.once('close', onEnd);
+        this.baseStream.once('end', onEnd);
         this.baseStream.once('readable', onReadable);
         this.baseStream.once('error', onError);
     }
