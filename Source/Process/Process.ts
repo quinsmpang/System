@@ -1,15 +1,11 @@
 import * as net from 'net';
-import {Readable, Writable} from 'stream';
 import {ChildProcess as NodeChildProcess, spawn, SpawnOptions} from 'child_process';
 import {NoAssociatedProcessException} from './NoAssociatedProcessException';
 import {ProcessEvent, ProcessEventType} from './ProcessEvent';
 import {ProcessStartInfo} from './ProcessStartInfo';
 import {ProcessMessageEvent} from './ProcessMessageEvent';
-import {ProcessIOMode} from './types';
 import {ProcessMessage} from './ProcessMessage';
 import {StandardInputStream} from './StandardInputStream';
-import {StandardOutputStream} from './StandardOutputStream';
-import {StandardErrorStream} from './StandardErrorStream';
 import {IDisposable} from '@typescript-standard-library/core/Source/types';
 import {EventEmitter} from '@typescript-standard-library/core/Source/Events/EventEmitter';
 import {ErrorEvent} from '@typescript-standard-library/core/Source/Events/ErrorEvent';
@@ -246,46 +242,46 @@ export class Process extends EventEmitter implements IDisposable {
             // shell: (startInfo.shellName && startInfo.useShellExecute) ? startInfo.shellName : startInfo.useShellExecute,
             // uid: startInfo.ownerUserId,
             // gid: startInfo.ownerGroupId,
-            stdio: [
-                this.getStandardInput(),
-                this.getStandardOutput(),
-                this.getStandardError()
-            ]
+            // stdio: [
+            //     this.getStandardInput(),
+            //     this.getStandardOutput(),
+            //     this.getStandardError()
+            // ]
         };
     }
 
 
-    private getStandardInput(): Writable | ProcessIOMode {
-        let standardInput: StandardInputStream | ProcessIOMode = this.startInfo.standardInput;
-
-        if (standardInput instanceof StandardInputStream) {
-            return standardInput.baseStream;
-        }
-
-        return standardInput;
-    }
-
-
-    private getStandardOutput(): Readable | ProcessIOMode {
-        let standardOutput: StandardOutputStream | ProcessIOMode = this.startInfo.standardOutput;
-
-        if (standardOutput instanceof StandardOutputStream) {
-            return standardOutput.baseStream;
-        }
-
-        return standardOutput;
-    }
-
-
-    private getStandardError(): Readable | ProcessIOMode {
-        let standardError: StandardErrorStream | ProcessIOMode = this.startInfo.standardError;
-
-        if (standardError instanceof StandardErrorStream) {
-            return standardError.baseStream;
-        }
-
-        return standardError;
-    }
+    // private getStandardInput(): Writable | ProcessIOMode {
+    //     let standardInput: StandardInputStream | ProcessIOMode = this.startInfo.standardInput;
+    //
+    //     if (standardInput instanceof StandardInputStream) {
+    //         return standardInput.baseStream;
+    //     }
+    //
+    //     return standardInput;
+    // }
+    //
+    //
+    // private getStandardOutput(): Readable | ProcessIOMode {
+    //     let standardOutput: StandardOutputStream | ProcessIOMode = this.startInfo.standardOutput;
+    //
+    //     if (standardOutput instanceof StandardOutputStream) {
+    //         return standardOutput.baseStream;
+    //     }
+    //
+    //     return standardOutput;
+    // }
+    //
+    //
+    // private getStandardError(): Readable | ProcessIOMode {
+    //     let standardError: StandardErrorStream | ProcessIOMode = this.startInfo.standardError;
+    //
+    //     if (standardError instanceof StandardErrorStream) {
+    //         return standardError.baseStream;
+    //     }
+    //
+    //     return standardError;
+    // }
 
 
     @Method.attached()

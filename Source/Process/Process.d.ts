@@ -30,9 +30,6 @@ export declare class Process extends EventEmitter implements IDisposable {
     protected notify(eventType: ProcessEventType): void;
     private spawnProcess();
     private getSpawnCommandOptions();
-    private getStandardInput();
-    private getStandardOutput();
-    private getStandardError();
     private onDisconnect();
     private onClose(exitCode, terminationSignal);
     private onExit(exitCode, terminationSignal);
