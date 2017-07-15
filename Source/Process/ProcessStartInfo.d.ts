@@ -1,4 +1,4 @@
-import { ProcessIOMode } from './types';
+import { ProcessIOMode } from './ProcessIOMode';
 import { StandardInputStream } from './StandardInputStream';
 import { StandardOutputStream } from './StandardOutputStream';
 import { StandardErrorStream } from './StandardErrorStream';

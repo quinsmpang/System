@@ -1,4 +1,4 @@
-import {ProcessIOMode} from './types';
+import {ProcessIOMode} from './ProcessIOMode';
 import {StandardInputStream} from './StandardInputStream';
 import {StandardOutputStream} from './StandardOutputStream';
 import {StandardErrorStream} from './StandardErrorStream';
@@ -16,9 +16,9 @@ export class ProcessStartInfo {
     public workingDirectory: string = process.cwd();
     public ownerUserId: number;
     public ownerGroupId: number;
-    public standardInput: StandardInputStream | ProcessIOMode = ProcessIOMode.Inherit;
-    public standardOutput: StandardOutputStream | ProcessIOMode = ProcessIOMode.Inherit;
-    public standardError: StandardErrorStream | ProcessIOMode = ProcessIOMode.Inherit;
+    public standardInput: StandardInputStream | ProcessIOMode = ProcessIOMode.Pipe;
+    public standardOutput: StandardOutputStream | ProcessIOMode = ProcessIOMode.Pipe;
+    public standardError: StandardErrorStream | ProcessIOMode = ProcessIOMode.Pipe;
 
 
     public constructor(fileName: string, ...commandLineArguments: string[]) {

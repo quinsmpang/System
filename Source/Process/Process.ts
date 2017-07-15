@@ -5,7 +5,7 @@ import {NoAssociatedProcessException} from './NoAssociatedProcessException';
 import {ProcessEvent, ProcessEventType} from './ProcessEvent';
 import {ProcessStartInfo} from './ProcessStartInfo';
 import {ProcessMessageEvent} from './ProcessMessageEvent';
-import {ProcessIOMode} from './types';
+import {ProcessIOMode} from './ProcessIOMode';
 import {ProcessMessage} from './ProcessMessage';
 import {StandardInputStream} from './StandardInputStream';
 import {StandardOutputStream} from './StandardOutputStream';
