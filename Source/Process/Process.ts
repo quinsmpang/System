@@ -239,25 +239,19 @@ export class Process extends EventEmitter implements IDisposable {
     private getSpawnCommandOptions(): SpawnOptions {
         let startInfo: ProcessStartInfo = this.startInfo;
 
-        let options = {
+        return {
             cwd: startInfo.workingDirectory,
             detached: startInfo.isDetached,
-            env: startInfo.environment,
-            shell: (startInfo.shellName && startInfo.useShellExecute) ? startInfo.shellName : startInfo.useShellExecute,
-            uid: startInfo.ownerUserId,
-            gid: startInfo.ownerGroupId,
+            // env: startInfo.environment,
+            // shell: (startInfo.shellName && startInfo.useShellExecute) ? startInfo.shellName : startInfo.useShellExecute,
+            // uid: startInfo.ownerUserId,
+            // gid: startInfo.ownerGroupId,
             stdio: [
                 this.getStandardInput(),
                 this.getStandardOutput(),
                 this.getStandardError()
             ]
         };
-
-        /* tslint:disable:no-console */
-        console.dir(options);
-        /* tslint:enable:no-console */
-
-        return options;
     }
 
 
