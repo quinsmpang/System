@@ -17,6 +17,7 @@ import {Assert} from '@typescript-standard-library/core/Source/Assertion/Assert'
 import {DeferredObject} from '@typescript-standard-library/core/Source/Async/DeferredObject';
 import {InvalidOperationException} from '@typescript-standard-library/core/Source/Exceptions/InvalidOperationException';
 import {Method} from '@typescript-standard-library/core/Source/Language/Decorators/Method';
+import {ProcessException} from './ProcessException';
 
 
 export class Process extends EventEmitter implements IDisposable {
@@ -44,6 +45,14 @@ export class Process extends EventEmitter implements IDisposable {
         let process: Process = new Process(new ProcessStartInfo(fileName, ...args));
 
         process.addEventListener(ProcessEvent.EXIT, () => {
+            if (process.exitCode !== 0) {
+                deferred.reject(new ProcessException(`Process exited with code (${process.exitCode})`, process));
+            } else {
+                deferred.resolve(process);
+            }
+        });
+
+        process.addEventListener(ProcessEvent.CLOSE, () => {
             deferred.resolve(process);
         });
 
