@@ -236,11 +236,10 @@ export class Process extends EventEmitter implements IDisposable {
     }
 
 
-    @Method.profile()
     private getSpawnCommandOptions(): SpawnOptions {
         let startInfo: ProcessStartInfo = this.startInfo;
 
-        return {
+        let options = {
             cwd: startInfo.workingDirectory,
             detached: startInfo.isDetached,
             env: startInfo.environment,
@@ -253,6 +252,12 @@ export class Process extends EventEmitter implements IDisposable {
                 this.getStandardError()
             ]
         };
+
+        /* tslint:disable:no-console */
+        console.dir(options);
+        /* tslint:enable:no-console */
+
+        return options;
     }
 
 
