@@ -17,5 +17,5 @@ export declare class HttpServerConfiguration {
     keepAliveTimeout: number;
     requestHandler: IHttpRequestHandler;
     errorHandler: IHttpErrorHandler;
-    constructor(host: string, port: number);
+    constructor(host?: string, port?: number);
 }

@@ -46,9 +46,9 @@ export class HttpRoute implements IHttpRoute {
     public constructor(
         routeTemplate: string,
         handler: IHttpRequestHandler,
-        defaultValues: HttpRouteValueDictionary,
-        additionalValues: HttpRouteValueDictionary,
-        constraints: IEnumerable<IHttpRouteConstraint>
+        defaultValues: HttpRouteValueDictionary = new HttpRouteValueDictionary(),
+        additionalValues: HttpRouteValueDictionary = new HttpRouteValueDictionary(),
+        constraints: IEnumerable<IHttpRouteConstraint> = []
     ) {
         this._routeTemplate = routeTemplate;
         this._handler = handler;

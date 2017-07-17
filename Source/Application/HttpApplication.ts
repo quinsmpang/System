@@ -1,10 +1,10 @@
-import {Application} from '@typescript-standard-library/core/Source/Application/Application';
-import {HttpServerConfiguration} from './HttpServerConfiguration';
+import {HttpServerConfiguration} from '../Net/Http/HttpServerConfiguration';
 import {Assert} from '@typescript-standard-library/core/Source/Assertion/Assert';
-import {HttpServer} from './HttpServer';
+import {HttpServer} from '../Net/Http/HttpServer';
+import {NodeApplication} from './NodeApplication';
 
 
-export abstract class HttpApplication extends Application {
+export abstract class HttpApplication extends NodeApplication {
     private _server: HttpServer;
     private _serverConfiguration: HttpServerConfiguration;
 
@@ -26,5 +26,10 @@ export abstract class HttpApplication extends Application {
 
         this._serverConfiguration = serverConfiguration;
         this._server = new HttpServer(serverConfiguration);
+    }
+
+
+    public stop(): Promise<void> {
+        return this.server.stop();
     }
 }

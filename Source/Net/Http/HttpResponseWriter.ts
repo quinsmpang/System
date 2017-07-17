@@ -12,7 +12,10 @@ export class HttpResponseWriter extends WriteStreamAdapter<ServerResponse, Buffe
         this.setStatus(response.statusCode, response.statusMessage);
         this.setHeaders(response.headers);
 
-        await this.writeContent(response.content);
+        if (response.content) {
+            await this.writeContent(response.content);
+        }
+
         await this.close();
     }
 

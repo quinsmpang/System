@@ -111,7 +111,7 @@ export class HttpServerConfiguration {
     }
 
 
-    public constructor(host: string, port: number) {
+    public constructor(host: string = 'localhost', port: number = 3000) {
         Assert.argument('host', host).notNull();
         Assert.argument('port', port).notNull().bounds(0, Math.pow(2, 16) - 1);
 

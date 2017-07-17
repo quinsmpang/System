@@ -17,7 +17,7 @@ export declare class HttpRoute implements IHttpRoute {
     readonly constraints: IEnumerable<IHttpRouteConstraint>;
     readonly additionalValues: HttpRouteValueDictionary;
     readonly defaultValues: HttpRouteValueDictionary;
-    constructor(routeTemplate: string, handler: IHttpRequestHandler, defaultValues: HttpRouteValueDictionary, additionalValues: HttpRouteValueDictionary, constraints: IEnumerable<IHttpRouteConstraint>);
+    constructor(routeTemplate: string, handler: IHttpRequestHandler, defaultValues?: HttpRouteValueDictionary, additionalValues?: HttpRouteValueDictionary, constraints?: IEnumerable<IHttpRouteConstraint>);
     getRouteData(request: HttpRequest): HttpRouteData;
     private extractRouteData(requestPath);
     private addDefaultValues(routeData);

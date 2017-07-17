@@ -13,7 +13,7 @@ export class HttpRoutesRegistry {
     }
 
 
-    public static registerRoute(route: IHttpRoute): void {
+    public static add(route: IHttpRoute): void {
         Assert.argument('route', route).notNull();
 
         this.routes.add(route);

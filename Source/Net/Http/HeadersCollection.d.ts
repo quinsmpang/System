@@ -3,6 +3,7 @@ import { IEqualityComparator } from '@typescript-standard-library/core/Source/Co
 import { Enumerable } from '@typescript-standard-library/core/Source/Collections/Enumerable';
 import { Collection } from '@typescript-standard-library/core/Source/Collections/Collection';
 export declare class HeadersCollection extends Enumerable<Header> {
+    private _headers;
     private _nameComparator;
     readonly nameComparator: IEqualityComparator<string>;
     constructor(nameComparator?: IEqualityComparator<string>);
@@ -12,6 +13,7 @@ export declare class HeadersCollection extends Enumerable<Header> {
     findAll(headerName: string): Collection<string>;
     remove(headerName: string): void;
     contains(headerName: string): boolean;
+    getIterator(): Iterator<Header>;
     private getSelector(headerName);
     private assertHeaderNameNotEmpty(headerName);
 }
